@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>set 17</title>
+</head>
+<body>
+	<center>
+	<h2>Collect X</h2>	
+<h4>Collect as many X as you can in 10 seconds</h4>
+<div class="score">
+	<tr><th><button onclick="start()">Start</button></th>
+	<th>Time:<span id="time">0</span></th></tr><br/>
+	<th class="scoreshow">Score:<span id="score">0</span></th>
+</div>
+<div id="panel"></div>
+<h3>Instruction:-</h3>
+<h4>+1 on Collect of X</h4>
+<h4>-1 on Wrong collect</h4>
+</center>
+
+</body>
+<script type="text/javascript">
+	let panel = document.getElementById('panel');
+	let time = document.getElementById('time');
+	var milisec = 0;
+	var sec = 0;
+	let score = 0;
+	var x ;
+	grid();
+	function grid(){
+		for (let i = 0; i <40; i++) {
+			let cell = document.createElement("button");
+			cell.setAttribute("onclick","Collect(this)");
+			cell.setAttribute("id",i);
+			cell.setAttribute("class","btnstyle");
+			cell.innerHTML = "0";
+			panel.appendChild(cell);
+			if(!((i+1)%8)){
+				let br = document.createElement("br");
+				panel.appendChild(br);
+			}
+		}
+	}
+	function start(){
+		if(!x){
+		x = setInterval(timer,1);
+		randomX();	
+		}
+		
+	}
+	function timer(){
+		milisec = milisec + 1;
+ 	  if (milisec == 1000) {
+	    milisec = 0;
+	    sec = ++sec;
+	  }
+	  time.innerHTML = sec+"."+milisec;
+	  check();
+	}
+	let o;
+	function randomX(){
+		o = Math.floor((Math.random() *(39-0)) + 0);
+		var btn = document.getElementById(o);
+		btn.innerHTML="X";
+		btn.setAttribute("class",green);
+	}
+	
+	function Collect(ele){
+		if(x){
+		var k = document.getElementById('score');
+		
+		if(ele.innerHTML=="X"){
+			score += 1;
+			k.innerHTML = score;
+		}
+		else{
+			score -= 1;
+			k.innerHTML = score;
+		}
+		reset();
+		randomX();	
+		}
+		
+	}
+	function check(){
+		if(sec==10){
+			alert("your score is "+ score);
+			clearInterval(x);
+			score=0;
+			sec = 0;
+			milisec =0;
+		}
+	}
+	
+	function reset(){
+		var l = document.getElementById(o);
+		l.innerHTML="0";
+		l.setAttribute("class","");
+		check();
+	}
+	
+</script>
+</html>

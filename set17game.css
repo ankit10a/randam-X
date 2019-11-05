@@ -1,0 +1,24 @@
+.score tr th button{
+	float : left;
+	display: inline-block;
+	width: 10%;
+
+}
+.score tr th{
+	float: right;
+	display: inline-block;
+	width: 20%;
+}
+.btnstyle{
+	padding: 5px;
+}
+
+.scoreshow{
+	float: right;
+	display: inline-block;
+	width: 30px;
+}
+.green{
+	background:  green;
+	font-weight: bold;
+}
